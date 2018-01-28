@@ -4,6 +4,7 @@ import numpy as np
 from global_functions import *
 import cv2
 from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
 from skimage.feature import hog
 # -------------------------------------------------------------------------------------------------------------
 def load_data(path,file_name):
@@ -33,6 +34,20 @@ zeros = np.zeros(len(data_no_vehicle))
 feature_list = [ones, zeros]
 
 label = np.hstack(feature_list)
+# for idx in range(len(data_no_vehicle)):
+#     img = data_no_vehicle[idx]
+#     img_YUV = convert_color(img, conv='RGB2YUV')
+#     hog_feat1,img1 = get_hog_features(img_YUV[:, :, 0], orient, pix_per_cell, cell_per_block, vis=True, feature_vec=True)
+#     hog_feat2,img2 = get_hog_features(img_YUV[:, :, 1], orient, pix_per_cell, cell_per_block, vis=True, feature_vec=True)
+#     hog_feat3,img3 = get_hog_features(img_YUV[:, :, 2], orient, pix_per_cell, cell_per_block, vis=True, feature_vec=True)
+#
+#     f, axarr = plt.subplots(1,4)
+#     axarr[0].imshow(img)
+#     axarr[1].imshow(img1)
+#     axarr[2].imshow(img2)
+#     axarr[3].imshow(img3)
+#     plt.show()
+#     pp = 0
 
 feature_list = []
 for idx in range(len(data_vehicle)):

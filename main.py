@@ -31,7 +31,7 @@ cell_per_block=2
 spatial_size = (32, 32)
 hist_bins = 32
 
-img = mpimg.imread('./data/test_images/test4.jpg')
+img = mpimg.imread('./test_images/test5.jpg')
 #---------------------------------------------------------------------------------------------------------------------------
 def add_heat(heatmap, bbox_list):
     # Iterate through list of bboxes
@@ -229,7 +229,7 @@ while cap.isOpened():
 
     # Read images
     ret, image = cap.read()
-
+    #image= img
     labels, draw_img_heat, heatmap, box_list = multi_scale_detection(image, ystart, ystop, svc, X_scaler, orient, pix_per_cell, cell_per_block, spatial_size,
                         hist_bins)
 
@@ -268,8 +268,8 @@ while cap.isOpened():
     heat_visualization = np.expand_dims(heat_visualization, axis=2)
     heat_visualization = cv2.cvtColor(heat_visualization, cv2.COLOR_GRAY2RGB)
 
-    cv2.imshow("Visualization", draw_img_heat)
-    cv2.waitKey(20)
+    plt.imshow(draw_img_heat)
+    plt.show()
 
     #cv2.imshow("Heat", heat_visualization)
     #cv2.waitKey(20)
