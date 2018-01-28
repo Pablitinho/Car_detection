@@ -95,7 +95,7 @@ Ultimately I searched on two scales using YUV 3-channel HOG features  getting ve
 ![alt text][image5]
 ![alt text][image6]
 ![alt text][image7]
-![alt text][image8]
+
 ---
 
 ### Video Implementation
