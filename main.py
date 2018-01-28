@@ -31,7 +31,7 @@ cell_per_block=2
 spatial_size = (32, 32)
 hist_bins = 32
 
-img = mpimg.imread('./test_images/test5.jpg')
+
 #---------------------------------------------------------------------------------------------------------------------------
 def add_heat(heatmap, bbox_list):
     # Iterate through list of bboxes
@@ -221,8 +221,10 @@ out_video_detection = cv2.VideoWriter('./out_video_detection.avi', fourcc, 20.0,
 
 heat_temp = 0
 
-for i in range(8*30):
-    ret, image = cap.read()
+# for i in range(33*30):
+#     ret, image = cap.read()
+#
+# img = mpimg.imread('./test_images/test5.jpg')
 
 print("Start the show....")
 while cap.isOpened():
@@ -233,7 +235,12 @@ while cap.isOpened():
     labels, draw_img_heat, heatmap, box_list = multi_scale_detection(image, ystart, ystop, svc, X_scaler, orient, pix_per_cell, cell_per_block, spatial_size,
                         hist_bins)
 
+    #image_box=draw_boxes(image, box_list, color=(0, 0, 255), thick=6)
 
+    # cv2.imshow("Detection", image_box)
+    # cv2.waitKey(0)
+    # plt.imshow(image_box)
+    # plt.show()
     heat = np.zeros_like(image[:, :, 0]).astype(np.float)
     # Add heat to each box in box list
     heat = add_heat(heat, box_list)
@@ -268,11 +275,17 @@ while cap.isOpened():
     heat_visualization = np.expand_dims(heat_visualization, axis=2)
     heat_visualization = cv2.cvtColor(heat_visualization, cv2.COLOR_GRAY2RGB)
 
-    plt.imshow(draw_img_heat)
-    plt.show()
+    # plt.imshow(draw_img_heat)
+    # plt.show()
+    # draw_img_heat = cv2.cvtColor(draw_img_heat, cv2.COLOR_RGB2BGR)
+    # f, axarr = plt.subplots(1,2)
+    # axarr[0].imshow(draw_img_heat)
+    # axarr[1].imshow(heat_visualization)
+    # plt.show()
 
-    #cv2.imshow("Heat", heat_visualization)
-    #cv2.waitKey(20)
+    cv2.imshow("draw_img_heat", draw_img_heat)
+    cv2.waitKey(20)
+
     out_video_heat.write(heat_visualization)
     out_video_detection.write(draw_img_heat)
 

@@ -20,7 +20,10 @@ The goals / steps of this project are the following:
 [image5]: ./images/detection_1.jpg
 [image6]: ./images/detection_2.jpg
 [image7]: ./images/detection_3.jpg
-[image8]: ./images/detection_4.jpg
+[image9]: ./images/detection_heat_map_1.jpg
+[image10]: ./images/detection_heat_map_2.jpg
+[image11]: ./images/detection_heat_map_3.jpg
+
 [video1]: ./project_video.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
@@ -98,7 +101,7 @@ Ultimately I searched on two scales using YUV 3-channel HOG features  getting ve
 ### Video Implementation
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./project_video.avi)
 
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
@@ -108,19 +111,11 @@ Here's a [link to my video result](./project_video.mp4)
      alfa = 0.2	
      heat_temp = heatmap+(heat_temp*(1-alfa)+heatmap*alfa)
 
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
+Here's an example result showing the heatmap after apply the proposed filter:
 
-### Here are six frames and their corresponding heatmaps:
-
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
-
+![alt text][image9]
+![alt text][image10]
+![alt text][image11]
 
 ---
 
@@ -128,5 +123,7 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+In order to speed up the method, it could be nice use a particle system in order to generate randomly cells and focusing on those one that get positives in the next frames. Other option is make use of different ROI in the scaled images, i.e., lower scales should focus one object more close to out car. Another important stuff is obtain the confidentiality of the classification and apply some kind of threshold. Also in order to avoid extra computation, when an object is detected we can focus in this area. 
+
+Another point is obtain a good bounding box, once that the object is detected we should find the best position of the detection to fit better to the dimensions of the vehicle.
 
